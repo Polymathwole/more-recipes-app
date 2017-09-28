@@ -1,0 +1,89 @@
+<html lang="en">
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <title>More Recipes</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <link rel="stylesheet" href="styles/userprofilestyle.css"/>
+            
+        </head>
+        <body>
+                <div class="modal fade" id="addRecipe"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalLabel">Add Recipe</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div id="form-container">
+                                            <form class="form-horizontal" action='' method="">
+                                                    <div class='form-group'>
+                                                        <label class='col-md-2' for="signin-recipe-title"><b>Title</b></label>
+                                                        <div class='col-md-10'>
+                                                            <input type="text" class='form-control' id="signin-recipe-title" placeholder="Recipe Title" name='recipeTitle'/>
+                                                        </div>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <label class='col-md-2' for="signin-recipe-content"><b>Details</b></label>
+                                                        <div class='col-md-12'>
+                                                            <textarea class='form-control' id="signin-recipe-content" placeholder="Recipe details" name='content'></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <div class='col-md-8'>
+                                                            <input type='submit' class='btn btn-info' value="Add Recipe"/>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <hr>
+                                    </div>
+                                  </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light" id="index-nav">
+                        <a class="navbar-brand" href="#">More Recipes</a>
+                    
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                </ul>
+                                <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecipe">Add Recipes</a>
+                                <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#signinModal">Sign out</a>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="container">
+                            <div class="row">
+                                <div class="profile-header-container">   
+                                    <div class="profile-header-img">
+                                        <img class="img-circle" src="images/user1.jpg" />
+                                        <!-- badge -->
+                                        <div class="rank-label-container">
+                                            <span class="label label-default rank-label"><b>Oluwole</b></span>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="card text-center">
+                                    <div class="card-header">Oluwole's Profile</div>
+                                    <div class="card-body">
+                                      <h2 class="card-title">Name: Oluwaremi Oluwole</h4>
+                                      <h2 class="card-title">Email: wolexindhauz@yahoo.com</h2>
+                                      <h2 class="card-title">Phone: 08063242564</h2>
+                                     
+                                    </div>
+                                  </div>
+                        </div>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        </body>
+</html>

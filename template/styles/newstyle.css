@@ -12,11 +12,21 @@ body
 .jumbotron
 {
     margin-top: 20px;
+    background-color: rgba(0,0,0,.3); 
+}
+
+h1.display-3,p.lead
+{
+    color: white;
 }
 
 .fixed-bottom
 {
     background-color: #515A5A;
     text-align: center;
-    border-radius: 20px
+}
+
+textarea
+{
+    height:250px
 }

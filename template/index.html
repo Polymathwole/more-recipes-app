@@ -101,6 +101,45 @@
                               </div>
                             </div>
                           </div>
+                          <div class="modal fade" id="addRecipe"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modalLabel">Add Recipe</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <div id="form-container">
+                                                    <form class="form-horizontal" action='' method="">
+                                                            <div class='form-group'>
+                                                                <label class='col-md-2' for="signin-recipe-title"><b>Title</b></label>
+                                                                <div class='col-md-10'>
+                                                                    <input type="text" class='form-control' id="signin-recipe-title" placeholder="Recipe Title" name='recipeTitle'/>
+                                                                </div>
+                                                            </div>
+                                                            <div class='form-group'>
+                                                                <label class='col-md-2' for="signin-recipe-content"><b>Details</b></label>
+                                                                <div class='col-md-12'>
+                                                                    <textarea class='form-control' id="signin-recipe-content" placeholder="Recipe details" name='content'></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class='form-group'>
+                                                                <div class='col-md-8'>
+                                                                    <input type='submit' class='btn btn-info' value="Add Recipe"/>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <hr>
+                                            </div>
+                                          </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="index-nav">
                     <a class="navbar-brand" href="#">More Recipes</a>
@@ -108,7 +147,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                         </ul>
-                        <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#signinModal" value="Sign in" >Sign in</a>
+                        <a class="navbar-brand btn btn-primary btn-lg" href="userprofile.html">View Profile</a>
+                        <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecipe">Add Recipes</a>
+                        <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#signinModal">Sign in</a>
                     </div>
                 </nav>
             </div>
