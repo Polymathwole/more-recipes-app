@@ -1,0 +1,29 @@
+#index-nav
+{
+    background-color: #515A5A !important;
+}
+
+.carousel-item
+{
+    height:500px;
+    width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.page-top
+{
+    font-size: 30px;
+    text-align: center
+}
+
+.dropdown
+{
+    margin-right:20px;
+}
+
+.capt
+{
+    font-size: 25px;
+    color: black;
+}
