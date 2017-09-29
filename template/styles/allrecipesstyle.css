@@ -28,6 +28,11 @@
     color: black;
 }
 
+#like
+{
+    margin-right:20px;
+}
+
 textarea
 {
     height:250px
