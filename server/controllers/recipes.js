@@ -1,5 +1,7 @@
-const Recipe=require('../models').Recipe;
-const Review=require('../models').Review;
+import dbs from '../models';
+
+const Recipe=dbs.Recipe;
+const Review=dbs.Review;
 
 const recipes = [
   {
@@ -18,7 +20,7 @@ const recipes = [
 }
 ];
 
-module.exports = {
+export default {
   db:recipes,
     create:(req, res)=>{
       return Recipe
@@ -36,12 +38,12 @@ module.exports = {
       title: req.body.title,
       content: req.body.content,
       upvotes:0,
-      downvotes:0,
-      creatorId: req.body.creatorId
+      downvotes:0
     };
 
-    if (recipes.length===0)
-      data.id=1
+    if (recipes.length===0) {
+      data.id=1;
+    }
     else
       data.id=recipes[recipes.length-1].id+1
 
@@ -119,7 +121,7 @@ module.exports = {
         if (parseInt(recipes[i].id, 10) === parseInt(req.params.recipeId, 10)) 
         {
           recipes[i].title = req.body.title||recipes[i].title;
-          recipes[i].content = req.body.title||recipes[i].content;
+          recipes[i].content = req.body.content||recipes[i].content;
           recipes[i].upvotes = req.body.upvotes||recipes[i].upvotes;
           recipes[i].downvotes = req.body.downvotes||recipes[i].downvotes;        
           return res.status(200).json(recipes[i])

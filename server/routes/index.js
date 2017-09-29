@@ -1,7 +1,8 @@
-const recipeController = require('../controllers').recipes;
-const reviewController = require('../controllers').reviews;
+import  controller from '../controllers'
+const recipeController=controller.recipes;
+const reviewController=controller.reviews;
 
-module.exports = (app) => {
+export default (app) => {
     app.post('/api/v1/recipes', recipeController.createDummy);
     app.get('/api/v1/recipes', recipeController.listDummy);
     app.put('/api/v1/recipes/:recipeId', recipeController.updateDummy);

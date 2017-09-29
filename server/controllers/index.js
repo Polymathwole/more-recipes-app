@@ -1,7 +1,7 @@
-const recipes=require('./recipes');
-const reviews=require('./reviews');
+import recipes from './recipes';
+import reviews from './reviews';
 
-module.exports = {
+export default {
     recipes,
     reviews
 };

@@ -4,8 +4,9 @@
   "description": "An app that allows users to provide recipes and receive reviews on them",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "mocha",
+    "start": "node server/app.js",
+    "build":"babel server -d output"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,17 @@
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.11.0"
-  }, 
+  },
   "engines": {
     "node": "8.1.2",
-    "npm":"5.0.2"
+    "npm": "5.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.5.3"
   }
 }

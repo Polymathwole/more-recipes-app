@@ -1,7 +1,11 @@
-const Review=require('../models').Review;
-const db=require('./recipes').db;
+import dbs from '../models';
 
-module.exports = {
+import dbDummy from './recipes'
+
+const db=dbDummy.db;
+const Review=dbs.Review;
+
+export default {
     create:(req,res)=>{
         return Review
         .create(
@@ -15,8 +19,6 @@ module.exports = {
         .catch(error =>res.status(400).json({detail:error.parent.detail}))
     },
     createDummy:(req,res)=>{
-        console.log(db)
-        console.log(req.params.recipeId)
         for (let i = 0; i < db.length; i++) 
         {
             
