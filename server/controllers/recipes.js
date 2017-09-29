@@ -1,23 +1,38 @@
 const Recipe=require('../models').Recipe;
 const Review=require('../models').Review;
 
-const recipes = [];
+const recipes = [
+  {
+    "title": "Eba",
+    "content": "Ingredients: Garri, Procedure: Stir in hot water",
+    "upvotes": 3,
+    "downvotes": 0,
+    "id": 1
+},
+{
+    "title": "Akara",
+    "content": "Best eaten with bread",
+    "upvotes": 12,
+    "downvotes": 5,
+    "id": 2
+}
+];
 
 module.exports = {
+  db:recipes,
     create:(req, res)=>{
       return Recipe
         .create({
           title: req.body.title,
           content: req.body.content,
           upvotes:0,
-          downvotes:0,
-          creatorId: req.body.creatorId
+          downvotes:0
         })
         .then(recipe => res.status(201).json(recipe))
         .catch(error =>res.status(400).json({detail:error.parent.detail}))
   },
   createDummy:(req,res)=>{
-    data={
+    let data={
       title: req.body.title,
       content: req.body.content,
       upvotes:0,
@@ -61,6 +76,26 @@ module.exports = {
   listDummy:(req,res)=>{
     res.status(201).json(recipes);
   },
+  listDummy:(req,res)=>{
+    let returnData;
+    
+       if (req.query && req.query.sort)
+       {
+         if (req.query.order && req.query.order === "asc")
+           recipes.sort((a, b)=> {
+             return a.upvotes - b.upvotes
+            });
+    
+          if (req.query.order && req.query.order === "des") 
+          {
+            recipes.sort((a, b)=>{ 
+              return b.upvotes - a.upvotes 
+            });
+          }
+        }
+    
+      return res.status(200).json(recipes)
+  },
 
   update:(req,res)=>{
     return Recipe
@@ -78,29 +113,21 @@ module.exports = {
   },
 
   updateDummy:(req,res)=>{
-      let recipeId=undefined;
-      for (let i=0;i<recipes.length;++i)
+      for (let i = 0; i < recipes.length; ++i)
       {
-        if (req.params.recipeId===recipes[i].id)
-          {
-            let recipe=recipes[i]
-            
-            for (let k of Object.keys(req.body))
-            {
-              recipes[id][k]=req.body[k];
-            }
-
-            return res.status(200).json(recipe[i])
-          }
-
-          if (i===recipes[recipes.length-1]&&(req.params.recipeId!==recipes[i].id))
-            return res.status(400).json({message:'Recipe Not Found'});
-      }
-
-      if (recipeId)
-      {
-
-      }
+        
+        if (parseInt(recipes[i].id, 10) === parseInt(req.params.recipeId, 10)) 
+        {
+          recipes[i].title = req.body.title||recipes[i].title;
+          recipes[i].content = req.body.title||recipes[i].content;
+          recipes[i].upvotes = req.body.upvotes||recipes[i].upvotes;
+          recipes[i].downvotes = req.body.downvotes||recipes[i].downvotes;        
+          return res.status(200).json(recipes[i])
+        }
+      
+        if (parseInt(recipes[i].id, 10) !== parseInt(req.params.recipeId, 10)&&i===recipes.length-1) 
+        return res.status(200).json({ message: "Recipe not found" })
+  }
   },
 
   delete:(req,res)=>{
@@ -116,5 +143,18 @@ module.exports = {
           .catch((error) => res.status(400).json({detail:error.parent.detail}));
     })
     .catch((error) => res.status(400).json({detail:error.parent.detail}));
+  },
+  deleteDummy:(req,res)=>{
+    for (let i = 0; i < recipes.length; ++i) 
+    {
+      if (parseInt(recipes[i].id, 10) === parseInt(req.params.recipeId, 10))
+      {
+        recipes.splice(i, 1);
+        return res.status(200).json({ message: "Recipe Deleted Successfully" })
+      }
+
+      if (parseInt(recipes[i].id, 10) !== parseInt(req.params.recipeId, 10)&&i===recipes.length-1) 
+      return res.status(404).json({ message: "Recipe Not Found" })
+    }
   }
 };
