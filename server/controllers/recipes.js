@@ -123,7 +123,8 @@ export default {
           recipes[i].title = req.body.title||recipes[i].title;
           recipes[i].content = req.body.content||recipes[i].content;
           recipes[i].upvotes = req.body.upvotes||recipes[i].upvotes;
-          recipes[i].downvotes = req.body.downvotes||recipes[i].downvotes;        
+          recipes[i].downvotes = req.body.downvotes||recipes[i].downvotes;
+                 
           return res.status(200).json(recipes[i])
         }
       
