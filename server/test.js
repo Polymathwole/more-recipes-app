@@ -9,17 +9,17 @@ const expect = chai.expect;
 
 describe('App',()=>{
     describe('app.get',()=>{
-        it('should return ',()=>{
+        it('should return ',(done)=>{
             chai.request(app).get('/api/v1/recipes').end( (err, res)=>{
-                expect(res).to.have.status(400);
-                
+                expect(res).to.have.status(201);
+                done();
              });
         })
 
-        it('should be JSON ',()=>{
-            chai.request(app).get('/api/v1/recipes').end( (err, res)=>{
-                expect(res.body).to.be.json;
-                
+        it('should be JSON ',(done)=>{
+            chai.request(app).get('/api/v1/recipes').send().end( (err, res)=>{
+                expect(res).to.be.json;
+                done()
              });
         })
 

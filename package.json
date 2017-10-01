@@ -4,7 +4,7 @@
   "description": "An app that allows users to provide recipes and receive reviews on them",
   "main": "app.js",
   "scripts": {
-    "test": "mocha output/test",
+    "test": "npm run build && mocha output/test",
     "start": "npm run build && node output/app",
     "build":"babel server -d output"
   },

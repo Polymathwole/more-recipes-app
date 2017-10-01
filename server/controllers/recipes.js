@@ -6,9 +6,10 @@ const Review=dbs.Review;
 const recipes = [
   {
     "title": "Eba",
-    "content": "Ingredients: Garri, Procedure: Stir in hot water",
+    "content": "Stir in hot water",
     "upvotes": 3,
     "downvotes": 0,
+    "ingredients":"Garri",
     "id": 1
 },
 {
@@ -16,6 +17,7 @@ const recipes = [
     "content": "Best eaten with bread",
     "upvotes": 12,
     "downvotes": 5,
+    "ingredients":"Beans, Salt, Pepper",
     "id": 2
 }
 ];
@@ -27,8 +29,9 @@ export default {
         .create({
           title: req.body.title,
           content: req.body.content,
+          creatorId: req.body.creatorId,
           upvotes:0,
-          downvotes:0
+          downvotes:0,
         })
         .then(recipe => res.status(201).json(recipe))
         .catch(error =>res.status(400).json({detail:error.parent.detail}))
@@ -38,7 +41,8 @@ export default {
       title: req.body.title,
       content: req.body.content,
       upvotes:0,
-      downvotes:0
+      downvotes:0,
+      ingredients: req.body.ingredients
     };
 
     if (recipes.length===0) {
@@ -76,12 +80,7 @@ export default {
       .catch(error => res.status(400).json({error}));
   },
   listDummy:(req,res)=>{
-    res.status(201).json(recipes);
-  },
-  listDummy:(req,res)=>{
-    let returnData;
-    
-       if (req.query && req.query.sort)
+    if (req.query && req.query.sort)
        {
          if (req.query.order && req.query.order === "asc")
            recipes.sort((a, b)=> {
@@ -96,7 +95,7 @@ export default {
           }
         }
     
-      return res.status(200).json(recipes)
+      return res.status(201).json(recipes)
   },
 
   update:(req,res)=>{
@@ -124,7 +123,8 @@ export default {
           recipes[i].content = req.body.content||recipes[i].content;
           recipes[i].upvotes = req.body.upvotes||recipes[i].upvotes;
           recipes[i].downvotes = req.body.downvotes||recipes[i].downvotes;
-                 
+          recipes[i].ingredients = req.body.ingredients||recipes[i].ingredients;
+
           return res.status(200).json(recipes[i])
         }
       

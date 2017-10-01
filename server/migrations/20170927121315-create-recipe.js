@@ -1,5 +1,5 @@
 'use strict';
-module.exports = {
+export default {
   up: (queryInterface, Sequelize) => {
      queryInterface.createTable('Recipes', {
       id: {
