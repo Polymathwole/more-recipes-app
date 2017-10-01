@@ -1,4 +1,5 @@
-import  controller from '../controllers'
+import controller from '../controllers';
+
 const recipeController=controller.recipes;
 const reviewController=controller.reviews;
 

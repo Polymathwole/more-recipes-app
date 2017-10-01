@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run build && mocha output/test",
     "start": "npm run build && node output/app",
-    "build":"babel server -d output"
+    "build": "babel server -d output",
+    "lint":"eslint server/app.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,9 @@
     "babel-preset-stage-2": "^6.24.1",
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
+    "eslint": "^4.8.0",
+    "eslint-config-airbnb-base": "^12.0.1",
+    "eslint-plugin-import": "^2.7.0",
     "mocha": "^3.5.3"
   }
 }
