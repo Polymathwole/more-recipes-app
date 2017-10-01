@@ -29,7 +29,7 @@ export default {
                 else
                     db[i].reviews.push(req.body.content);
 
-                return res.status(200).json(db[i]);
+                return res.status(201).json(db[i]);
             }
 
             if (parseInt(db[i].id, 10) !== parseInt(req.params.recipeId, 10)&&i===db[i].length-1)

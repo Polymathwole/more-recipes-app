@@ -7,7 +7,7 @@
     "test": "npm run build && mocha output/test",
     "start": "npm run build && node output/app",
     "build": "babel server -d output",
-    "lint":"eslint server/app.js"
+    "lint":"eslint server"
   },
   "repository": {
     "type": "git",

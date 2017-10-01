@@ -63,7 +63,7 @@ export default {
           as:'reviews'
         }]
       })
-      .then(recipes => res.status(200).json(recipes))
+      .then(recipes => res.status(201).json(recipes))
       .catch(error => res.status(400).json(error));
   },
 
@@ -95,7 +95,7 @@ export default {
           }
         }
     
-      return res.status(201).json(recipes)
+      return res.status(200).json(recipes)
   },
 
   update:(req,res)=>{
@@ -114,7 +114,7 @@ export default {
   },
 
   updateDummy:(req,res)=>{
-      for (let i = 0; i < recipes.length; ++i)
+      for (let i = 1; i < recipes.length; ++i)
       {
         
         if (parseInt(recipes[i].id, 10) === parseInt(req.params.recipeId, 10)) 
@@ -125,11 +125,11 @@ export default {
           recipes[i].downvotes = req.body.downvotes||recipes[i].downvotes;
           recipes[i].ingredients = req.body.ingredients||recipes[i].ingredients;
 
-          return res.status(200).json(recipes[i])
+          return res.status(201).json(recipes[i])
         }
       
         if (parseInt(recipes[i].id, 10) !== parseInt(req.params.recipeId, 10)&&i===recipes.length-1) 
-        return res.status(200).json({ message: "Recipe not found" })
+        return res.status(404).json({ message: "Recipe not found" })
   }
   },
 
@@ -148,7 +148,7 @@ export default {
     .catch((error) => res.status(400).json({detail:error.parent.detail}));
   },
   deleteDummy:(req,res)=>{
-    for (let i = 0; i < recipes.length; ++i) 
+    for (let i = 1; i < recipes.length; ++i) 
     {
       if (parseInt(recipes[i].id, 10) === parseInt(req.params.recipeId, 10))
       {
