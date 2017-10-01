@@ -1,4 +1,5 @@
 'use strict';
+
 export default (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
     content: DataTypes.STRING,
