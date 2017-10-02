@@ -4,3 +4,6 @@ node_js:
 - "7"
 - "6"
 - "5"
+env:
+  global:
+    - NODE_ENV=test
