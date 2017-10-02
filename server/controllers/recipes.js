@@ -1,8 +1,3 @@
-import dbs from '../models';
-
-const Recipe=dbs.Recipe;
-const Review=dbs.Review;
-
 const recipes = [
   {
     "title": "Eba",
@@ -24,18 +19,7 @@ const recipes = [
 
 export default {
   db:recipes,
-    create:(req, res)=>{
-      return Recipe
-        .create({
-          title: req.body.title,
-          content: req.body.content,
-          creatorId: req.body.creatorId,
-          upvotes:0,
-          downvotes:0,
-        })
-        .then(recipe => res.status(201).json(recipe))
-        .catch(error =>res.status(400).json({detail:error.parent.detail}))
-  },
+
   createDummy:(req,res)=>{
     let data={
       title: req.body.title,
@@ -50,35 +34,10 @@ export default {
     }
     else
       data.id=recipes[recipes.length-1].id+1
-
     recipes.push(data);
     res.status(201).json(data)
   },
 
-  list:(req, res)=>{
-    return Recipe
-      .findAll({
-        include: [{
-          model: Review,
-          as:'reviews'
-        }]
-      })
-      .then(recipes => res.status(201).json(recipes))
-      .catch(error => res.status(400).json(error));
-  },
-
-  listByUpvotes:(req, res)=>{
-    return Recipe
-      .findAll({
-        include: [{
-          model: Review,
-          as:'reviews'
-        }],
-        order:['upvotes','DESC'],limit:3
-      })
-      .then(recipes => res.status(200).json(recipes))
-      .catch(error => res.status(400).json({error}));
-  },
   listDummy:(req,res)=>{
     if (req.query && req.query.sort)
        {
@@ -98,21 +57,6 @@ export default {
       return res.status(200).json(recipes)
   },
 
-  update:(req,res)=>{
-    return Recipe
-        .findById(req.params.recipeId)
-        .then(
-          recipe=>{
-            if (!recipe)
-              return res.status(404).json({message: 'Recipe Not Found'});
-
-          return recipe.update(req.body,{fields:Object.keys(req.body)})
-          .then(() => res.status(200).json(recipe))
-          .catch((error) => res.status(400).json({detail:error.parent.detail}));
-        })
-        .catch((error) => res.status(400).json({detail:error.parent.detail}));
-  },
-
   updateDummy:(req,res)=>{
       for (let i = 1; i < recipes.length; ++i)
       {
@@ -130,23 +74,9 @@ export default {
       
         if (parseInt(recipes[i].id, 10) !== parseInt(req.params.recipeId, 10)&&i===recipes.length-1) 
         return res.status(404).json({ message: "Recipe not found" })
-  }
+    }
   },
 
-  delete:(req,res)=>{
-    return Recipe
-    .findById(req.params.recipeId)
-    .then(
-      recipe=>{
-        if (!recipe)
-          return res.status(404).json({message: 'Recipe Not Found'});
-
-          return recipe.destroy()
-          .then(() => res.status(200).json({message: 'Recipe Deleted Successfully'}))
-          .catch((error) => res.status(400).json({detail:error.parent.detail}));
-    })
-    .catch((error) => res.status(400).json({detail:error.parent.detail}));
-  },
   deleteDummy:(req,res)=>{
     for (let i = 1; i < recipes.length; ++i) 
     {
