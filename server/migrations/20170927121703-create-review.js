@@ -1,5 +1,5 @@
 'use strict';
-export default {
+module.exports= {
   up: (queryInterface, Sequelize) => {
      queryInterface.createTable('Reviews', {
       id: {
@@ -28,7 +28,8 @@ export default {
         type: Sequelize.INTEGER,
         references: {
           model: 'Recipes',
-          key: 'id'
+          key: 'id',
+          as:'reviews'
         }
       }
     });

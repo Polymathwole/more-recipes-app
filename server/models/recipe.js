@@ -2,6 +2,7 @@
 export default (sequelize, DataTypes) => {
   const Recipe = sequelize.define('Recipe', {
     title: DataTypes.STRING,
+    ingredients: DataTypes.STRING,
     content: DataTypes.STRING,
     upvotes: DataTypes.INTEGER,
     downvotes: DataTypes.INTEGER,

@@ -7,8 +7,8 @@ import Sequelize from 'sequelize';
 const basename  = path.basename(__filename);
 const env       = process.env.NODE_ENV || 'development';
 const db        = {};
-
-import  configd from '../config/config.js';
+const confign = fs.readFileSync('server/config/config.json');
+const configd = JSON.parse(confign);
 const config=configd[env]
 let sequelize;
 
