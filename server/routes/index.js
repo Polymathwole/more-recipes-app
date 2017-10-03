@@ -1,9 +1,13 @@
 import controller from '../controllers';
+import auth from '../middleware/auth.js';
 
 const recipeController=controller.recipes;
 const reviewController=controller.reviews;
+const userController=controller.users;
 
 export default (app) => {
+    app.post('/api/v1/users/signup', auth.createUser,userController.createUser);
+    app.get('/api/v1/users/signup', auth.createUser,userController.createUser);
     app.post('/api/v1/recipes', recipeController.create);
     app.get('/api/v1/recipes', recipeController.list);
     app.put('/api/v1/recipes/:recipeId', recipeController.update);
