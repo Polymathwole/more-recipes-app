@@ -7,7 +7,7 @@
     "test": "npm run build && mocha output/test",
     "start": "npm run build && node output/app",
     "build": "babel server -d output",
-    "lint":"eslint server"
+    "lint": "eslint server"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/Polymathwole/more-recipes-app#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "express": "^4.15.5",
+    "jsonwebtoken": "^8.0.1",
     "morgan": "^1.8.2",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
