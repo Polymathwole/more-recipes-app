@@ -10,7 +10,12 @@ const userController=controller.users;
 dotenv.config();
 
 export default {
-    createUser:(req,res,next)=>{
+    authSignup:(req,res,next)=>{
+        if (!req.body.username)
+            return res.status(400).json({ message: "Username required" });
+
+        if (!req.body.email)
+            return res.status(400).json({ message: "Email required" });
 
         if (req.body.password)
         {
@@ -19,27 +24,41 @@ export default {
                 if (req.body.confirmPassword===req.body.password)
                 {
                     crypt.hash(req.body.password, parseInt(process.env.saltround))
-                    .then((hash)=>{
+                    .then(hash=>{
                         req.body.password= hash;
                         next(); 
                     })
                     .catch(err=>res.status(500).json({message:"Error"}));
                 }
                 else{
-                     res.status(400).json({message:"Passwords does not match "})
+                     return res.status(400).json({message:"Passwords does not match "})
                 }
             }
             else if(!req.body.confirmPassword)
             {
-                 res.status(400).json({message:"Please confirm password"})
+                 return res.status(400).json({message:"Please confirm password"})
             }
         } 
         else if (!req.body.password)
         {
-             res.status(400).json({message:"Password cannot be null"})
+             return res.status(400).json({message:"Password cannot be null"})
         }    
     },
 
-    getUser:(req,res)=>{
+    authLogin:(req,res,next)=>{
+        if (req.body.username)
+        {
+            if (req.body.password)
+            {
+                next();    
+            }
+            else{
+                return res.status(400).json({ message: "Password required!" });
+            }
+        }
+        else
+        {
+            return res.status(400).json({ message: "Username required" });
+        }
     }
 }
