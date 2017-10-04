@@ -1,5 +1,5 @@
 'use strict';
-module.exports = {
+module.exports= {
   up: (queryInterface, Sequelize) => {
      queryInterface.createTable('Recipes', {
       id: {
@@ -9,6 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      ingredients: {
         type: Sequelize.STRING,
         allowNull: false
       },

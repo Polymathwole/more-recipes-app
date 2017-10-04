@@ -1,5 +1,6 @@
 'use strict';
-module.exports = (sequelize, DataTypes) => {
+
+module.exports= (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
     content: DataTypes.STRING,
     creatorId:DataTypes.INTEGER

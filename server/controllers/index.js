@@ -1,7 +1,11 @@
-const recipes=require('./recipes');
-const reviews=require('./reviews');
+import recipes from './recipes';
+import reviews from './reviews';
+import users from './users';
+import favorites from './favorites';
 
-module.exports = {
+export default {
     recipes,
-    reviews
+    reviews,
+    users,
+    favorites
 };
