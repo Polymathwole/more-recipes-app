@@ -42,7 +42,7 @@ export default {
 
         faves.forEach(
           (favorite)=>{
-            therecipes.push(favorite.Recipe);
+            recipes.push(favorite.Recipe);
           }
         )
        
