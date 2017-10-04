@@ -13,12 +13,6 @@ dotenv.config();
 
 export default {
     authSignup:(req,res,next)=>{
-        if (!req.body.username)
-            return res.status(400).json({ message: "Username required" });
-
-        if (!req.body.email)
-            return res.status(400).json({ message: "Email required" });
-
         if (req.body.password)
         {
             if (req.body.confirmPassword)
@@ -33,7 +27,7 @@ export default {
                     .catch(err=>res.status(500).json({message:"Error"}));
                 }
                 else{
-                     return res.status(400).json({message:"Passwords does not match "})
+                     return res.status(400).json({message:"Passwords does not match"})
                 }
             }
             else if(!req.body.confirmPassword)

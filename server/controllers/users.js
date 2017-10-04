@@ -8,7 +8,7 @@ dotenv.config();
 
 export default {
     createUser:(req, res)=>{
-        let username = req.body.username.toLowerCase().trim();
+        let username = req.body.username.trim();
         let email = req.body.email.toLowerCase().trim();
         let password = req.body.password;
 
@@ -47,7 +47,7 @@ export default {
     },
 
     confirmUser:(req, res)=>{
-        let username = req.body.username.toLowerCase().trim();
+        let username = req.body.username.trim();
 
         User.findOne({
             where: 
@@ -62,7 +62,7 @@ export default {
                                 if (match)
                                 {
                                     let data={message:`Welcome, ${user.username}`,id:user.id};
-                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 3600});
+                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 3600*24*7});
                                     return res.header('x-auth',token).status(201).json(data);
                                    
                                 }

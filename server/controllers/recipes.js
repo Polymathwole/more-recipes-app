@@ -15,7 +15,7 @@ export default {
           downvotes:0,
         })
         .then(recipe => res.status(201).json(recipe))
-        .catch(error =>res.status(400).json({detail:error}))
+        .catch(error =>res.status(400).json({error}))
   },
 
   list:(req, res)=>{
@@ -46,6 +46,22 @@ export default {
       
       })
       .catch(error => res.status(400).json(error));
+  },
+
+  listOne:(req,res)=>{
+    if (parseInt(req.params.userId)!==req.currentUser.id)
+      return res.status(400).json({message:"You can only view your recipes!"});
+
+    return Recipe
+    .findAll({where:{creatorId:req.currentUser.id},include: [{
+      model: Review,
+      as:'reviews'
+    }]}
+  )
+    .then(recipes => {
+      res.status(200).json(recipes)
+    })
+    .catch(error => res.status(400).json(error));
   },
 
   update:(req,res)=>{

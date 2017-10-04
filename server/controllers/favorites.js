@@ -25,7 +25,7 @@ export default {
   getForId:(req, res)=>{
 
     if (parseInt(req.params.userId)!==req.currentUser.id)
-      return res.status(400).json({message:"You can only view your favorites!"});
+      return res.status(400).json({message:"You can only view your favorite recipes!"});
 
     Favorite.findAll(
       {where:{creatorId:req.params.userId},include:[{
