@@ -36,8 +36,6 @@ export default {
                         password
                       })
                       .then((user)=>{
-                        let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: "5min"}); 
-
                         let data = {message:"Signup successful",id:user.id,username:user.username,email:user.email}
                        
                         return res.status(201).json(data); 
@@ -63,10 +61,10 @@ export default {
                             .then(match=>{
                                 if (match)
                                 {
-                                    let data={message:`Welcome, ${user.username}`};
-                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: "1h"});
-                                    
-                                    return res.status(201).json(data);
+                                    let data={message:`Welcome, ${user.username}`,id:user.id};
+                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 3600});
+                                    return res.header('x-auth',token).status(201).json(data);
+                                   
                                 }
                                 else
                                 {
@@ -80,5 +78,5 @@ export default {
                             return res.status(400).json({ message: "Username does not exist!" });
                         }})
             .catch(error => { return res.status(500).send(error) });
-    }
+    },
 }

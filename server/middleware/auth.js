@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import crypt from 'bcrypt';
 import dotenv from 'dotenv';
 import controller from '../controllers';
+import Userdb from '../models'
+const User=Userdb.User;
 
 const recipeController=controller.recipes;
 const reviewController=controller.reviews;
@@ -60,5 +62,38 @@ export default {
         {
             return res.status(400).json({ message: "Username required" });
         }
+    },
+
+    allowAccess:(req,res,next)=>{
+        let token = req.headers['x-access-token'];
+       
+          if (!token) 
+          {
+            return res.status(401).json({message: 'Not authorized!'});
+          }
+          
+          jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded)=>
+          {
+            if (err) 
+            {
+              return res.json({message: 'Token authentication failed'});
+            } 
+            
+            if (decoded)
+            {  
+              User.findById(decoded.id)
+              .then(user => {
+
+                    if(!user) 
+                        {
+                            return res.status(401).send({error: 'User verification unsuccessful'})
+                        }
+
+                    req.currentUser = user;
+                    next();
+                })
+                .catch(error =>res.status(400).json({message:'Error'}));
+            }
+        })
     }
 }
