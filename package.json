@@ -4,10 +4,12 @@
   "description": "An app that allows users to provide recipes and receive reviews on them",
   "main": "app.js",
   "scripts": {
-    "test": "npm run build && mocha output/test",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "test": "npm run build && nyc --reporter=html --reporter=text mocha output/test",
     "prestart": "npm install -g babel-cli",
     "start": "npm run build && node output/app.js",
     "build": "babel server -d output",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "lint": "eslint server"
   },
   "repository": {
