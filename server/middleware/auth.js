@@ -48,14 +48,11 @@ export default {
             {
                 next();    
             }
-            else{
-                return res.status(400).json({ message: "Password required!" });
-            }
+
+            return res.status(400).json({ message: "Password required!" });
         }
-        else
-        {
+
             return res.status(400).json({ message: "Username required" });
-        }
     },
 
     allowAccess:(req,res,next)=>{
@@ -63,14 +60,14 @@ export default {
        
           if (!token) 
           {
-            return res.status(401).json({message: 'Not authorized!'});
+            return res.status(401).json({message: 'Not authorized for this action. Please sign in!'});
           }
           
           jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded)=>
           {
             if (err) 
             {
-              return res.json({message: 'Token authentication failed'});
+              return res.status(401).json({message: 'Token authentication failed!'});
             } 
             
             if (decoded)
@@ -86,7 +83,7 @@ export default {
                     req.currentUser = user;
                     next();
                 })
-                .catch(error =>res.status(400).json({message:'Error'}));
+                .catch(error =>res.status(500).json({message:'Error'}));
             }
         })
     }

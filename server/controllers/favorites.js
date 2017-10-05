@@ -6,13 +6,28 @@ const Favorite = dbs.Favorite;
 
 export default {
     create:(req, res)=>{
-      return Favorite
-        .create({
-          recipeId:req.body.recipeId,
-          creatorId: req.body.creatorId,
+
+      Favorite.findOne({
+        where: {
+          recipeId:req.params.recipeId,
+          creatorId:req.currentUser.id
+        }
+      })
+      .then((fave) => {
+          if (fave) {
+            return res.status(201).json({ message: 'recipe is already a favorite' });
+          }
+
+        Favorite.create({
+          recipeId:req.params.recipeId,
+          creatorId: req.currentUser.id,
         })
-        .then(fave => res.status(201).json(fave))
-        .catch(error =>res.status(400).json({detail:error}))
+        .then((newfav) => {
+          return res.status(201).json({ message: `Recipe ${recipeId} has been added as your favourite`, newfav });
+        })
+        .catch((error) => res.status(500).send(error));
+    })
+    .catch((error) => res.status(500).send(error));
   },
 
   get:(req, res)=>{
@@ -29,8 +44,7 @@ export default {
 
     Favorite.findAll(
       {where:{creatorId:req.params.userId},include:[{
-        model: Recipe,
-        as:"favoriterecipes"
+        model: Recipe
       }]}
     )
     .then(faves=>{
@@ -49,7 +63,7 @@ export default {
        
         return res.status(200).json(recipes)
     })
-    .catch(error =>res.status(400).json(error))
+    .catch(error =>res.status(500).json(error))
 
   }
 }
