@@ -29,7 +29,8 @@ export default {
 
     Favorite.findAll(
       {where:{creatorId:req.params.userId},include:[{
-        model: Recipe
+        model: Recipe,
+        as:"favoriterecipes"
       }]}
     )
     .then(faves=>{

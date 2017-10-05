@@ -37,8 +37,9 @@ export default {
                       })
                       .then((user)=>{
                         let data = {message:"Signup successful",id:user.id,username:user.username,email:user.email}
+                        let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 3600*24*7})
                        
-                        return res.status(201).json(data); 
+                        return res.header('x-auth',token).status(201).json(data); 
                       })
                       .catch(error =>res.status(400).json({message:'Error'}));
                 } 
@@ -61,8 +62,8 @@ export default {
                             .then(match=>{
                                 if (match)
                                 {
-                                    let data={message:`Welcome, ${user.username}`,id:user.id};
                                     let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 3600*24*7});
+                                    let data={message:`Welcome, ${user.username}`,id:user.id,token};
                                     return res.header('x-auth',token).status(201).json(data);
                                    
                                 }

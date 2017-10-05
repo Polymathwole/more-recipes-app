@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 import controller from '../controllers';
 import auth from '../middleware/auth.js';
-const token;
+let token="";
 
 const recipeController=controller.recipes;
 const reviewController=controller.reviews;
@@ -297,7 +297,7 @@ describe('App',()=>{
     });
 
     describe("Authorized POST request to '/api/v1/users/signup'",()=>{
-        it("should return a 'Password mismatch' message",(done)=>{
+        it("should return a 'Signup successful' message",(done)=>{
             chai.request(app)
             .post('/api/v1/users/signup')
             .send({username: "wolexy",
@@ -306,25 +306,36 @@ describe('App',()=>{
                 confirmPassword: "password"
             })
             .end((err, res) => {
-                expect(res).to.have.status(201);
-                expect(res.body.message).to.equal('Signup successful');
+                
+
+                if (token)
+                {
+                    expect(res).to.have.status(201);
+                    expect(res.body.message).to.be.equal('Signup successful');
+                }
+                else
+                {
+                    expect(res).to.have.status(400);
+                    expect(res.body.message).to.be.equal('Username already exists');
+                }
+
+                token=res.header["x-auth"];
                 done();
             });
-        }
-    )});
+        })}
+      );
 
-    describe("Authorized POST request to '/api/v1/users/signup'",()=>{
-        it("should return a 'Password mismatch' message",(done)=>{
+    describe("Authorized POST request to '/api/v1/users/signin'",()=>{
+        it("should return a 201 message",(done)=>{
             chai.request(app)
-            .post('/api/v1/users/signup')
+            .post('/api/v1/users/signin')
             .send({username: "wolexy",
-                email: "wol@y.co",
                 password:"password",
-                confirmPassword: "password"
             })
             .end((err, res) => {
+                token=res.header["x-auth"];
+                expect(res).to.have.header("x-auth");
                 expect(res).to.have.status(201);
-                expect(res.body.message).to.equal('Signup successful');
                 done();
             });
         }

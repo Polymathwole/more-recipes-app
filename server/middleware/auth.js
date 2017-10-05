@@ -19,7 +19,7 @@ export default {
             {
                 if (req.body.confirmPassword===req.body.password)
                 {
-                    crypt.hash(req.body.password, parseInt(process.env.saltround))
+                    crypt.hash(req.body.password, parseInt(process.env.SALTROUND))
                     .then(hash=>{
                         req.body.password= hash;
                         next(); 

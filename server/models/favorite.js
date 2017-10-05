@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const Favorite = sequelize.define('Favorite',{
     recipeId: {
@@ -7,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Recipes',
         key: 'id',
-        as: 'favorites',
+        as: 'favoriterecipes',
       }
     },
     creatorId: {
@@ -16,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Users',
         key: 'id',
-        as: 'favorites',
+        as: 'favoriteusers',
       }
     }
 });

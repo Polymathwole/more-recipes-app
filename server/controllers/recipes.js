@@ -23,7 +23,7 @@ export default {
       .findAll({
         include: [{
           model: Review,
-          as:'reviews'
+          as:'recipereviews'
         }]
       })
       .then(recipes => {
@@ -55,7 +55,7 @@ export default {
     return Recipe
     .findAll({where:{creatorId:req.currentUser.id},include: [{
       model: Review,
-      as:'reviews'
+      as:'recipereviews'
     }]}
   )
     .then(recipes => {

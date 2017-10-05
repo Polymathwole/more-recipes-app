@@ -3,19 +3,22 @@
 import fs from 'fs'
 import path from 'path';
 import Sequelize from 'sequelize';
+import configpath from '../config/config.js'
 
 const basename  = path.basename(__filename);
 const env       = process.env.NODE_ENV || 'development';
 const db        = {};
-const confign = fs.readFileSync('server/config/config.json');
-const configd = JSON.parse(confign);
-const config=configd[env]
+const config=configpath[env];
 let sequelize;
 
 if (config.use_env_variable)
+{
  sequelize = new Sequelize(process.env[config.use_env_variable]);
+}
 else
+{
  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
 
 fs
   .readdirSync(__dirname)

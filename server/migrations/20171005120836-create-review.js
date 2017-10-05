@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Favorites', {
+    return queryInterface.createTable('Reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,18 +10,24 @@ module.exports = {
       },
       recipeId: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Recipes',
           key: 'id',
-          as:'favorites'
+          as: 'recipereviews',
         }
+      },
+      content: {
+        allowNull: false,
+        type: Sequelize.TEXT
       },
       creatorId: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Users',
           key: 'id',
-          as:'favorites'
+          as: 'reviewcreators',
         }
       },
       createdAt: {
@@ -35,6 +41,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Favorites');
+    return queryInterface.dropTable('Reviews');
   }
 };
