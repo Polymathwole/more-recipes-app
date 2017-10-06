@@ -12,7 +12,7 @@ A user can come up with a recipe, he/she can add it on the app and get feedback 
 
 ## API endpoints
 
-### /api/v1/users/signup
+### /api/v1/users/signup    [https://wole-more-recipes.herokuapp.com/api/v1/users/signup]
 Request type: POST
 Allows users to sign up to the More Recipes app
 
