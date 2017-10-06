@@ -1,0 +1,32 @@
+body
+{
+    background:url("../images/food1.jpeg") no-repeat center center fixed!important;
+    background-size: cover !important; 
+}
+
+#index-nav
+{
+    background-color: #515A5A !important;
+}
+
+.jumbotron
+{
+    margin-top: 20px;
+    background-color: rgba(0,0,0,.3); 
+}
+
+h1.display-3,p.lead
+{
+    color: white;
+}
+
+.fixed-bottom
+{
+    background-color: #515A5A;
+    text-align: center;
+}
+
+textarea
+{
+    height:250px
+}

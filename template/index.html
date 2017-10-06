@@ -1,41 +1,174 @@
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title>More Recipes | Signup</title>
-        <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css"/>
-        <link rel="stylesheet" href="styles/pagestyle.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js"/>
-    </head>
-    <body>
-        <div id="intro">
-            <h1 id="welcome-recipes-header">Welcome to More Recipes!</h1>
-            <p id="welcome-recipes-para">More Recipes provides a platform for you to share your awesome recipe ideas allowing you to get reviews and votes from other users</p>
-        </div>
-        <div id="form-container">
-                <form class="form-horizontal" action='' method="GET">
-                    <div class='form-group'>
-                        <label class='col-md-2' for="signin-user">Username</label>
-                        <div class='col-md-10'>
-                            <input type="text" class='form-control' id="signin-user" placeholder="Enter username" name='user'/>
+        <head>
+            <meta charset="utf-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <title>More Recipes</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <link rel="stylesheet" href="styles/newstyle.css"/>
+            
+        </head>
+        <body>
+                <div class="modal fade" id="signupModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="modalLabel">Sign up to More Recipes</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div id="form-container">
+                                            <form class="form-horizontal" action='' method="">
+                                                <div class='form-group'>
+                                                    <label class='col-md-2' for="signup-user">Username</label>
+                                                    <div class='col-md-10'>
+                                                        <input type="text" class='form-control' id="signup-user" placeholder="Enter username" name='username'/>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label class='col-md-2' for="signup-email">E-mail</label>
+                                                    <div class='col-md-10'>
+                                                        <input type="email" class='form-control' id="signup-email" placeholder="Enter e-mail" name='email'/>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label class='col-md-2' for="signup-pass">Password</label>
+                                                    <div class='col-md-10'>
+                                                        <input type="password" class='form-control' id="signup-pass" placeholder="Enter password" name='pass'/>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label class='col-md-2' for="cpw">Confirm Password</label>
+                                                    <div class='col-md-10'>
+                                                        <input type="password" class='form-control' id="cpw" placeholder="Confirm password" name='cpass'/>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <div class='col-md-5 col-md-offset-2'>
+                                                        <input type='submit' class='btn btn-info' value="Sign up"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    </div>
+                                  </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
                         </div>
+                      </div>
+                      <div class="modal fade" id="signinModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="modalLabel">Sign in to More Recipes</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                        <div id="form-container">
+                                                <form class="form-horizontal" action='' method="GET">
+                                                        <div class='form-group'>
+                                                            <label class='col-md-2' for="signin-user">Username</label>
+                                                            <div class='col-md-10'>
+                                                                <input type="text" class='form-control' id="signin-user" placeholder="Enter username" name='user'/>
+                                                            </div>
+                                                        </div>
+                                                        <div class='form-group'>
+                                                            <label class='col-md-2' for="signin-pass">Password</label>
+                                                            <div class='col-md-10'>
+                                                                <input type="password" class='form-control' id="signin-pass" placeholder="Enter password" name='pass'/>
+                                                            </div>
+                                                        </div>
+                                                        <div class='form-group'>
+                                                            <div class='col-md-8'>
+                                                                <input type='submit' class='btn btn-info' value="Sign in"/>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <hr>
+                                                    <div class="col-md-7 col-md-offset-2">
+                                                    <p>Don't have an account? <a href='signup.html'>Sign up</a></p>
+                                                    </div>
+                                        </div>
+                                      </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal fade" id="addRecipe"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="modalLabel">Add Recipe</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <div id="form-container">
+                                                    <form class="form-horizontal" action='' method="">
+                                                            <div class='form-group'>
+                                                                <label class='col-md-2' for="signin-recipe-title"><b>Title</b></label>
+                                                                <div class='col-md-10'>
+                                                                    <input type="text" class='form-control' id="signin-recipe-title" placeholder="Recipe Title" name='recipeTitle'/>
+                                                                </div>
+                                                            </div>
+                                                            <div class='form-group'>
+                                                                <label class='col-md-2' for="signin-recipe-content"><b>Details</b></label>
+                                                                <div class='col-md-12'>
+                                                                    <textarea class='form-control' id="signin-recipe-content" placeholder="Recipe details" name='content'></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class='form-group'>
+                                                                <div class='col-md-8'>
+                                                                    <input type='submit' class='btn btn-info' value="Add Recipe"/>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <hr>
+                                            </div>
+                                          </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light" id="index-nav">
+                    <a class="navbar-brand" href="#">More Recipes</a>
+            
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                        </ul>
+                        <a class="navbar-brand btn btn-primary btn-lg" href="userprofile.html">View Profile</a>
+                        <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#addRecipe">Add Recipes</a>
+                        <a class="navbar-brand btn btn-primary btn-lg" data-toggle="modal" data-target="#signinModal">Sign in</a>
                     </div>
-                    <div class='form-group'>
-                        <label class='col-md-2' for="signin-pass">Password</label>
-                        <div class='col-md-10'>
-                            <input type="password" class='form-control' id="signin-pass" placeholder="Enter password" name='pass'/>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <div class='col-md-8'>
-                            <input type='submit' class='btn btn-info' value="Sign in"/>
-                        </div>
-                    </div>
-                </form>
-                <hr>
-                <div class="col-md-7 col-md-offset-2">
-                <p>Don't have an account? <a href='signup.html'>Sign up</a></p>
+                </nav>
+            </div>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1 class="display-3">Welcome to More Recipes!</h1>
+                    <p class="lead">More Recipes provides a platform for you to share your awesome recipe ideas allowing you to get reviews and votes from other users</p>
+                    <hr class="my-4">
+                    <p class="lead">
+                      <input type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#signupModal" value="Sign up">
+                    </p>
                 </div>
-        </div>
-    </body>
-</html>
+                      
+            </div>
+            <footer class="fixed-bottom">
+                    <p>More Recipes</p>
+            </footer>
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        </body>
+    </html>

@@ -1,0 +1,62 @@
+#index-nav
+{
+    background-color: #515A5A !important;
+}
+
+.carousel-item
+{
+    height:500px;
+    width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.page-top
+{
+    font-size: 30px;
+    text-align: center
+}
+
+.dropdown
+{
+    margin-right:20px;
+}
+
+.capt
+{
+    font-size: 20px;
+    color: black;
+    text-align: center;
+}
+
+#like
+{
+    margin-right:20px;
+}
+
+textarea
+{
+    height:250px
+}
+
+.card
+{
+    width:500px !important;
+    margin:20px;
+}
+
+.capt-head
+{
+    color: black;
+    text-align: center;
+}
+
+.likes,.provide-review
+{
+    text-align: center;
+}
+
+.card-body
+{
+    background-color:#515A5A;
+}
