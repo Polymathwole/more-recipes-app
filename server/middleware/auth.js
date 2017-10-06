@@ -67,7 +67,7 @@ export default {
           {
             if (err) 
             {
-              return res.status(401).json({message: 'Token authentication failed!'});
+              return res.status(401).json({message: 'Token expired! Please sign in again'});
             } 
             
             if (decoded)

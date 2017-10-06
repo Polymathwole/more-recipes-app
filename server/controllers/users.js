@@ -60,7 +60,7 @@ export default {
                             .then(match=>{
                                 if (match)
                                 {
-                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 300});
+                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 1800});
                                     let data={message:`Welcome, ${user.username}`,id:user.id,token};
                                     return res.status(200).json(data);
                                 }
