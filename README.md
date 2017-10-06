@@ -31,7 +31,7 @@ Body:
 + username
 + email
 
-### /api/v1/users/signin
+### /api/v1/users/signin    [https://wole-more-recipes.herokuapp.com/api/v1/users/signin]
 Request type: POST
 Allows users to sign in to the More Recipes app
 
@@ -49,7 +49,7 @@ Body:
 
 
 
-### /api/v1/recipes
+### /api/v1/recipes   [https://wole-more-recipes.herokuapp.com/api/v1/recipes]
 Request type: POST
 Allows authenticated users to post recipes to the More Recipes app  
 
@@ -65,7 +65,7 @@ Body:
 
 
 
-### /api/v1/recipes
+### /api/v1/recipes [https://wole-more-recipes.herokuapp.com/api/v1/recipes]
 Request type: GET
 Allows users to get all recipes from the More Recipes app  
 
@@ -74,7 +74,7 @@ Allows users to get all recipes from the More Recipes app
 
 
 
-### /api/v1/recipes/<recipeId>
+### /api/v1/recipes/<recipeId>  [https://wole-more-recipes.herokuapp.com/api/v1/recipes/<recipeId>]
 Request type: PUT
 Allows authenticated users to modify recipe they added to the app 
 
@@ -91,7 +91,7 @@ Parameter:
 
 
 
-### /api/v1/recipes/<recipeId>
+### /api/v1/recipes/<recipeId>  [https://wole-more-recipes.herokuapp.com/api/v1/recipes/<recipeId>]
 Request type: DELETE
 An API route that allows authenticated user to delete a recipe they added
 
@@ -105,7 +105,7 @@ Parameter:
 
 
 
-### /api/v1/recipes/<recipeId>/reviews
+### /api/v1/recipes/<recipeId>/reviews  [https://wole-more-recipes.herokuapp.com/api/v1/recipes/<recipeId>/reviews]
 Request type: POST
 An API route that allows an authenticated user post a review for a recipe
 
@@ -121,7 +121,7 @@ Parameter:
 
 
 
-### GET: /api/v1/recipes?sort=upvotes&order=desc
+### GET: /api/v1/recipes?sort=upvotes&order=desc    [https://wole-more-recipes.herokuapp.com/api/v1/recipes?sort=upvotes&order=desc]
 Request type: GET
 An API route that allows a user to get just recipes with the most upvotes
 
@@ -130,7 +130,7 @@ An API route that allows a user to get just recipes with the most upvotes
 
 
 
-### GET: /api/v1/users/<userId>/recipes
+### GET: /api/v1/users/<userId>/recipes [https://wole-more-recipes.herokuapp.com/api/v1/recipesusers/<userId>/recipes]
 Request: GET
 An API route that allows an authenticated user to get all his/her favorite recipes
 
