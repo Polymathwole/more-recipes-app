@@ -24,8 +24,9 @@
 
 .capt
 {
-    font-size: 25px;
+    font-size: 20px;
     color: black;
+    text-align: center;
 }
 
 #like
@@ -37,3 +38,27 @@ textarea
 {
     height:250px
 }
+
+.card
+{
+    width:500px !important;
+    margin:20px;
+}
+
+.capt-head
+{
+    color: black;
+    text-align: center;
+}
+
+.likes,.provide-review
+{
+    text-align: center;
+}
+
+.card-body
+{
+    background-color:#515A5A;
+    border-radius: 10px;
+}
+
