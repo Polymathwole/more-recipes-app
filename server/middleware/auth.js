@@ -46,7 +46,7 @@ export default {
         {
             if (req.body.password)
             {
-                next();    
+                return next();    
             }
 
             return res.status(400).json({ message: "Password required!" });
