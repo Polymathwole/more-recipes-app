@@ -10,12 +10,10 @@ export default {
           title: req.body.title,
           content: req.body.content,
           ingredients:req.body.ingredients,
-          creatorId: req.currentUser.id,
-          upvotes:0,
-          downvotes:0,
+          creatorId: req.currentUser.id
         })
         .then(recipe => res.status(201).json(recipe))
-        .catch(error =>res.status(400).json({detail:error}))
+        .catch(error =>res.status(400).json({error}))
   },
 
   list:(req, res)=>{
@@ -23,7 +21,7 @@ export default {
       .findAll({
         include: [{
           model: Review,
-          as:'reviews'
+          as:'recipereviews'
         }]
       })
       .then(recipes => {
@@ -46,6 +44,22 @@ export default {
       
       })
       .catch(error => res.status(400).json(error));
+  },
+
+  listOne:(req,res)=>{
+    if (parseInt(req.params.userId)!==req.currentUser.id)
+      return res.status(400).json({message:"You can only view your recipes!"});
+
+    return Recipe
+    .findAll({where:{creatorId:req.currentUser.id},include: [{
+      model: Review,
+      as:'recipereviews'
+    }]}
+  )
+    .then(recipes => {
+      res.status(200).json(recipes)
+    })
+    .catch(error => res.status(400).json(error));
   },
 
   update:(req,res)=>{

@@ -13,19 +13,13 @@ dotenv.config();
 
 export default {
     authSignup:(req,res,next)=>{
-        if (!req.body.username)
-            return res.status(400).json({ message: "Username required" });
-
-        if (!req.body.email)
-            return res.status(400).json({ message: "Email required" });
-
         if (req.body.password)
         {
             if (req.body.confirmPassword)
             {
                 if (req.body.confirmPassword===req.body.password)
                 {
-                    crypt.hash(req.body.password, parseInt(process.env.saltround))
+                    crypt.hash(req.body.password, parseInt(process.env.SALTROUND))
                     .then(hash=>{
                         req.body.password= hash;
                         next(); 
@@ -33,7 +27,7 @@ export default {
                     .catch(err=>res.status(500).json({message:"Error"}));
                 }
                 else{
-                     return res.status(400).json({message:"Passwords does not match "})
+                     return res.status(400).json({message:"Passwords does not match"})
                 }
             }
             else if(!req.body.confirmPassword)
@@ -52,16 +46,13 @@ export default {
         {
             if (req.body.password)
             {
-                next();    
+                return next();    
             }
-            else{
-                return res.status(400).json({ message: "Password required!" });
-            }
+
+            return res.status(400).json({ message: "Password required!" });
         }
-        else
-        {
+
             return res.status(400).json({ message: "Username required" });
-        }
     },
 
     allowAccess:(req,res,next)=>{
@@ -69,14 +60,14 @@ export default {
        
           if (!token) 
           {
-            return res.status(401).json({message: 'Not authorized!'});
+            return res.status(401).json({message: 'Not authorized for this action. Please sign in!'});
           }
           
           jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded)=>
           {
             if (err) 
             {
-              return res.json({message: 'Token authentication failed'});
+              return res.status(401).json({message: 'Token expired! Please sign in again'});
             } 
             
             if (decoded)
@@ -92,7 +83,7 @@ export default {
                     req.currentUser = user;
                     next();
                 })
-                .catch(error =>res.status(400).json({message:'Error'}));
+                .catch(error =>res.status(500).json({message:'Error'}));
             }
         })
     }

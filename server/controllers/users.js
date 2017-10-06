@@ -8,7 +8,7 @@ dotenv.config();
 
 export default {
     createUser:(req, res)=>{
-        let username = req.body.username.toLowerCase().trim();
+        let username = req.body.username.trim();
         let email = req.body.email.toLowerCase().trim();
         let password = req.body.password;
 
@@ -37,17 +37,16 @@ export default {
                       })
                       .then((user)=>{
                         let data = {message:"Signup successful",id:user.id,username:user.username,email:user.email}
-                       
-                        return res.status(201).json(data); 
+                        let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 300})
                       })
-                      .catch(error =>res.status(400).json({message:'Error'}));
+                      .catch(error =>res.status(500).json({message:'Error'}));
                 } 
               })
         .catch(error => { return res.status(500).send(error) });
     },
 
     confirmUser:(req, res)=>{
-        let username = req.body.username.toLowerCase().trim();
+        let username = req.body.username.trim();
 
         User.findOne({
             where: 
@@ -61,10 +60,9 @@ export default {
                             .then(match=>{
                                 if (match)
                                 {
-                                    let data={message:`Welcome, ${user.username}`,id:user.id};
-                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 3600});
-                                    return res.header('x-auth',token).status(201).json(data);
-                                   
+                                    let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 1800});
+                                    let data={message:`Welcome, ${user.username}`,id:user.id,token};
+                                    return res.status(200).json(data);
                                 }
                                 else
                                 {

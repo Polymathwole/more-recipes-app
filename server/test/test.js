@@ -1,6 +1,14 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
+import controller from '../controllers';
+import auth from '../middleware/auth.js';
+let token="";
+
+const recipeController=controller.recipes;
+const reviewController=controller.reviews;
+const userController=controller.users;
+const favoriteController=controller.favorites;
 
 chai.use(chaiHttp);
 
@@ -34,8 +42,8 @@ describe('App',()=>{
                 done()
              });
         }); 
-    });
-
+    });  
+    
     describe("GET request to '/api/v1/recipes' should",()=>{
         it('return 200 status',(done)=>{
             chai.request(app)
@@ -73,73 +81,45 @@ describe('App',()=>{
                 expect(res).to.be.json;
                 done()
              });
-        });
-
-        it('sort by upvotes in descending order',(done)=>{
-            chai.request(app)
-            .get('/api/v1/recipes?sort=upvotes&order=des')
-            .end((err, res)=>{
-                let resData = JSON.stringify([
-                    {
-                        "title": "Akara",
-                        "content": "Best eaten with bread",
-                        "upvotes": 12,
-                        "downvotes": 5,
-                        "ingredients": "Beans, Salt, Pepper",
-                        "id": 2
-                    },
-                    {
-                        "title": "Eba",
-                        "content": "Stir in hot water",
-                        "upvotes": 3,
-                        "downvotes": 0,
-                        "ingredients": "Garri",
-                        "id": 1
-                    }
-                ]);
-
-                expect(JSON.stringify(res.body)).to.equal(resData);
-                done();
-             });
-        });
+        });  
     });
 
     describe("Any other request to '/' apart from GET",()=>{
-
-        it("POST request to '/' should return a 404",(done)=>{
-            chai.request(app)
-            .post('/')
-            .send({title: "One",
-                content: "Two",
-                ingredients:"Three"})
-            .end((err, res) => {
-                expect(res).to.have.status(404);
-                done();
+        
+                it("POST request to '/' should return a 404",(done)=>{
+                    chai.request(app)
+                    .post('/')
+                    .send({title: "One",
+                        content: "Two",
+                        ingredients:"Three"})
+                    .end((err, res) => {
+                        expect(res).to.have.status(404);
+                        done();
+                    });
+                });
+        
+                it("PUT request to '/' should return a 404",(done)=>{
+                    chai.request(app)
+                    .put('/')
+                    .send({title: "Three",
+                        ingredients:"One"})
+                    .end((err, res) => {
+                        expect(res).to.have.status(404);
+                        done();
+                    });
+                });
+        
+                it("DELETE request to '/' should return a 404",(done)=>{
+                    chai.request(app)
+                    .delete('/')
+                    .end((err, res) => {
+                        expect(res).to.have.status(404);
+                        done();
+                    });
+                });
             });
-        });
 
-        it("PUT request to '/' should return a 404",(done)=>{
-            chai.request(app)
-            .put('/')
-            .send({title: "Three",
-                ingredients:"One"})
-            .end((err, res) => {
-                expect(res).to.have.status(404);
-                done();
-            });
-        });
-
-        it("DELETE request to '/' should return a 404",(done)=>{
-            chai.request(app)
-            .delete('/')
-            .end((err, res) => {
-                expect(res).to.have.status(404);
-                done();
-            });
-        });
-    });
-
-    describe("Any request to unspecified routes",()=>{
+            describe("Any request to unspecified routes",()=>{
                 it("GET request to '/abvvsg' should return a 404",(done)=>{
                     chai.request(app)
                     .get('/abvvsg')
@@ -182,98 +162,138 @@ describe('App',()=>{
                 });
     });
 
-    describe("POST request to '/api/v1/recipes'",()=>{
+    describe("Unauthorized POST request to '/api/v1/users/signup'",()=>{
         
-        it("should return a 201 response",(done)=>{
+        it("should return a 400 response",(done)=>{
             chai.request(app)
-            .post('/api/v1/recipes')
+            .post('/api/v1/users/signup')
             .send({title: "One",
                 content: "Two",
                 ingredients:"Three"})
             .end((err, res) => {
-                expect(res).to.have.status(201);
+                expect(res).to.have.status(400);
                 done();
             });
         });
 
-        it("should return correct data",(done)=>{
+        it("should return a 'Username required' message",(done)=>{
             chai.request(app)
-            .post('/api/v1/recipes')
+            .post('/api/v1/users/signup')
             .send({title: "One",
                 content: "Two",
                 ingredients:"Three"})
             .end((err, res) => {
-                expect(res.body).to.have.property('id');
-                done();
-            });
-        });
-    });
-    
-    describe("POST request to '/api/v1/recipes/1/reviews'",()=>{   
-        it("should return a 201 response",(done)=>{
-            chai.request(app)
-            .post('/api/v1/recipes/1/reviews')
-            .send({content: "Two"})
-            .end((err, res) => {
-                expect(res).to.have.status(201);
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Username required');
                 done();
             });
         });
 
-        it("should have reviews",(done)=>{
+        it("should return a 'Username not enough' message",(done)=>{
             chai.request(app)
-            .post('/api/v1/recipes/1/reviews')
-            .send({content: "Trs tres tres"})
+            .post('/api/v1/users/signup')
+            .send({username: "wole",
+                email: "wole@y.com",
+                ingredients:"Three"})
             .end((err, res) => {
-                expect(res.body).to.have.property('reviews').to.not.be.null;
-                done();
-            });
-        }); 
-    });
-
-    describe("PUT request to '/api/v1/recipes/1'",()=>{   
-        it("should return a 201 response",(done)=>{
-            chai.request(app)
-            .put('/api/v1/recipes/1/')
-            .send({title: "One",
-            content: "Two",
-            ingredients:"Three"})
-            .end((err, res) => {
-                expect(res).to.have.status(201);
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Username must be a minimum of 5 characters!');
                 done();
             });
         });
 
-        it("should return a 404 response",(done)=>{
+        it("should return an 'Email required' message",(done)=>{
             chai.request(app)
-            .put('/api/v1/recipes/13/')
-            .send({title: "One",
-            content: "Two",
-            ingredients:"Three"})
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                content: "Two",
+                ingredients:"Three"})
             .end((err, res) => {
-                expect(res).to.have.status(404);
-                done();
-            });
-        });    
-    });
-
-    describe("DELETE request to '/api/v1/recipes/1'",()=>{   
-        it("should return a 200 response",(done)=>{
-            chai.request(app)
-            .delete('/api/v1/recipes/1/')
-            .end((err, res) => {
-                expect(res).to.have.status(200);
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Email required');
                 done();
             });
         });
 
-        it("should return a 404 response",(done)=>{
+        it("should return a 'Invalid Email' message",(done)=>{
             chai.request(app)
-            .delete('/api/v1/recipes/13/')
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                email: "Two",
+                ingredients:"Three"})
             .end((err, res) => {
-                expect(res).to.have.status(404);
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Invalid email address!');
                 done();
             });
-        });    
+        });
+
+        it("should return an 'Invalid Email' message",(done)=>{
+            chai.request(app)
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                email: " ",
+                ingredients:"Three"})
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Invalid email address!');
+                done();
+            });
+        });
+
+        it("should return a 'Password not null' message",(done)=>{
+            chai.request(app)
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                email: "wole@y.com",
+                ingredients:"Three"})
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Password cannot be null');
+                done();
+            });
+        });
+
+        it("should return a 'Password not enough' message",(done)=>{
+            chai.request(app)
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                email: "wole@y.com",
+                password:"Three"})
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Password must be a minimum of 7 characters!');
+                done();
+            });
+        });
+
+        it("should return a 'Confirm Password' message",(done)=>{
+            chai.request(app)
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                email: "wole@y.com",
+                password:"Threeyy"})
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Please confirm password');
+                done();
+            });
+        });
+
+        it("should return a 'Password mismatch' message",(done)=>{
+            chai.request(app)
+            .post('/api/v1/users/signup')
+            .send({username: "wolexy",
+                email: "wole@y.com",
+                password:"Threeyyy",
+                confirmPassword: "Foiur"
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal('Passwords does not match');
+                done();
+            });
+        });
     });
+
 });
