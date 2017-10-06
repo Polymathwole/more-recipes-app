@@ -10,9 +10,7 @@ export default {
           title: req.body.title,
           content: req.body.content,
           ingredients:req.body.ingredients,
-          creatorId: req.currentUser.id,
-          upvotes:0,
-          downvotes:0,
+          creatorId: req.currentUser.id
         })
         .then(recipe => res.status(201).json(recipe))
         .catch(error =>res.status(400).json({error}))
