@@ -6,6 +6,10 @@ const Favorite = dbs.Favorite;
 
 export default {
     create:(req, res)=>{
+      if (isNaN(req.params.recipeId)) {
+        return res.status(400)
+          .json({ message: 'RecipeId must be a number' });
+      }
 
       Favorite.findOne({
         where: {
@@ -15,19 +19,20 @@ export default {
       })
       .then((fave) => {
           if (fave) {
-            return res.status(201).json({ message: 'recipe is already a favorite' });
-          }
-
-        Favorite.create({
-          recipeId:req.params.recipeId,
-          creatorId: req.currentUser.id,
+            return res.status(201).json({ message: 'Recipe is already a favorite' });
+          } 
+          
+      return Favorite.create({
+        recipeId:req.params.recipeId,
+        creatorId: req.currentUser.id,
         })
-        .then((newfav) => {
-          return res.status(201).json({ message: `Recipe ${recipeId} has been added as your favourite`, newfav });
-        })
-        .catch((error) => res.status(500).send(error));
+      .then((fave) => {
+           res.status(201).json({ message: `Recipe ${fave.recipeId} has been added as your favourite`, fave });
+          })
+      .catch((error) => res.status(500).json(error));   
     })
-    .catch((error) => res.status(500).send(error));
+    .catch((error) => res.status(500).json(error)); 
+      
   },
 
   get:(req, res)=>{
