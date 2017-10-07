@@ -38,6 +38,8 @@ export default {
                       .then((user)=>{
                         let data = {message:"Signup successful",id:user.id,username:user.username,email:user.email}
                         let token = jwt.sign({id: user.id},process.env.TOKEN_SECRET,{ expiresIn: 300})
+
+                        return res.status(201).json(data);
                       })
                       .catch(error =>res.status(500).json({message:'Error'}));
                 } 
