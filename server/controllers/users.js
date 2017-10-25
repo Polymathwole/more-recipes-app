@@ -1,9 +1,9 @@
-import dbs from '../models';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import crypt from 'bcrypt';
+import dbs from '../models';
 
-const User=dbs.User;
+const { User } = dbs;
 dotenv.config();
 
 export default {

@@ -1,6 +1,6 @@
 body
 {
-    background:url("../images/food1.jpeg") no-repeat center center fixed!important;
+    background:url("../images/food1.jpeg") no-repeat !important;
     background-size: cover !important; 
 }
 

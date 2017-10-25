@@ -1,23 +1,15 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
-import controller from '../controllers';
-import auth from '../middleware/auth.js';
-let token="";
-
-const recipeController=controller.recipes;
-const reviewController=controller.reviews;
-const userController=controller.users;
-const favoriteController=controller.favorites;
 
 chai.use(chaiHttp);
 
 const expect = chai.expect;
 
-describe('App',()=>{
-    describe("GET request to ",()=>{
-        it("'/' should return 200 status",(done)=>{
-            chai.request(app)
+describe('App', () => {
+  describe('GET request to ', () => {
+    it("'/' should return 200 status", (done) => {
+      chai.request(app)
             .get('/')
             .end((err, res) => {
                 expect(res).to.have.status(200);
